@@ -20,12 +20,23 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MealboardComponent } from './pages/mealboard/mealboard.component';
+import { MealInfoComponent } from './pages/meal-info/meal-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    MealboardComponent,
+    MealInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +45,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -43,9 +56,16 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatListModule,
     MatGridListModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

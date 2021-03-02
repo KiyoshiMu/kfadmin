@@ -1,0 +1,102 @@
+<div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+  <form [formGroup]="mealForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title
+          ><mat-form-field appearance="fill" class="full-width">
+            <mat-label>Name</mat-label>
+
+            <input
+              type="text"
+              matInput
+              placeholder="Pure Water"
+              formControlName="name"
+              [value]="mealForm.get('name')"
+            />
+            <mat-error *ngIf="mealForm.controls['name'].hasError('required')">
+              Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field></mat-card-title
+        >
+      </mat-card-header>
+
+      <ng-container *ngIf="upload; else placeholder">
+        <img mat-card-image [src]="upload" alt="meal image" />
+      </ng-container>
+      <ng-template #placeholder>
+        <img
+          mat-card-image
+          src="https://i.pinimg.com/originals/60/ed/ab/60edabe557e8139d52dae12f380205dc.png"
+          alt="meal placeholder"
+        />
+      </ng-template>
+      <p *ngIf="msg">{{ msg }}</p>
+      <input
+        style="display: none"
+        type="file"
+        (change)="onFileChanged($event)"
+        #fileInput
+      />
+      <button type="button" (click)="fileInput.click()">Select File</button>
+
+      <mat-card-content>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea
+            cdkTextareaAutosize
+            matInput
+            placeholder="You need water."
+            formControlName="description"
+            [value]="mealForm.get('description')"
+          ></textarea>
+        </mat-form-field>
+
+        <mat-radio-group
+          formControlName="size"
+          [value]="mealForm.get('size')"
+          class="full-width"
+        >
+          <mat-radio-button value="small">Small size</mat-radio-button>
+          <mat-radio-button value="middle">Middle size</mat-radio-button>
+          <mat-radio-button value="large">Large size</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Price</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="10"
+            formControlName="price"
+            [value]="mealForm.get('price')"
+          />
+          <mat-error *ngIf="mealForm.controls['price'].hasError('required')">
+            Price is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Cost</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="5"
+            formControlName="cost"
+            [value]="mealForm.get('cost')"
+          />
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="!mealForm.valid"
+          routerLink=".."
+        >
+          Submit
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

@@ -6,16 +6,23 @@ import { map, shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result) => result.matches),
       shareReplay()
     );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+  _board = 'board';
+  switchBoard(name: string) {
+    this._board = name;
+  }
 
+  public get board(): string {
+    return this._board;
+  }
 }

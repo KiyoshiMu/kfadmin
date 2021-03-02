@@ -1,4 +1,4 @@
-export interface SaleStat{
-    income: number
-    orders: number
+export interface SaleStat {
+  income: number;
+  orders: number;
 }

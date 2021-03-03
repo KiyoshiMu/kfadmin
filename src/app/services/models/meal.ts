@@ -15,6 +15,8 @@ export interface MealStat {
   size: string;
   price: number;
   cost: number;
-  weeklyOrders: number;
-  totalOrders: number;
+  weeklyOrder: number;
+  totalOrder: number;
+  totalIncome: number;
+  weeklyIncome: number;
 }

@@ -1,0 +1,29 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Fake Market</h1>
+  <mat-grid-list [cols]="cols | async">
+    <mat-grid-tile *ngFor="let meal of meals | async" colspan="1" rowspan="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{ meal.name }}
+            <button mat-raised-button color="primary" type="button" (click)="buy(meal)">
+              Buy
+            </button>
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ meal.size }} {{ meal.price | currency }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content class="dashboard-card-content"> 
+          <img
+          mat-card-image
+          [src]="meal.cover"
+          alt="meal image"
+          [routerLink]="['meal-view', meal.id]"
+        />
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

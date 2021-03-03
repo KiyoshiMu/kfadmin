@@ -1,6 +1,6 @@
 <div class="grid-container">
   <h1 class="mat-h1">Meals</h1>
-  <a mat-button routerLink="./add"><mat-icon>add</mat-icon></a>
+  <a mat-button [routerLink]="['edit','add']"><mat-icon>add</mat-icon></a>
 
   <mat-grid-list [cols]="cols | async">
     <mat-grid-tile *ngFor="let meal of meals | async" colspan="1" rowspan="1">
@@ -17,7 +17,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item [routerLink]="meal.id">Edit</button>
+              <button mat-menu-item [routerLink]="['edit', meal.id]">Edit</button>
               <button mat-menu-item (click)="rmMeal(meal.id)">Remove</button>
             </mat-menu>
           </mat-card-title>
@@ -29,7 +29,7 @@
           mat-card-image
           [src]="meal.cover"
           alt="meal image"
-          [routerLink]="meal.id"
+          [routerLink]="['view', meal.id]"
         />
         <mat-card-content class="dashboard-card-content"> </mat-card-content>
       </mat-card>

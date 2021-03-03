@@ -5,13 +5,12 @@ import {
 } from '@angular/fire/firestore';
 import { MealUnit } from './models/meal';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class EditMealService {
+export class MealEditService {
   mealCollection: AngularFirestoreCollection<MealUnit>;
   constructor(
     private afs: AngularFirestore,

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +28,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MealboardComponent } from './pages/mealboard/mealboard.component';
 import { MealInfoComponent } from './pages/meal-info/meal-info.component';
+import { MealViewComponent } from './pages/meal-view/meal-view.component';
+import { FakeMarketComponent } from './pages/fake-market/fake-market.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -37,11 +39,14 @@ import { MealInfoComponent } from './pages/meal-info/meal-info.component';
     DashboardComponent,
     MealboardComponent,
     MealInfoComponent,
+    MealViewComponent,
+    FakeMarketComponent,
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    FlexLayoutModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

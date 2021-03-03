@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
-import { EditMealService } from 'src/app/services/edit-meal.service';
+import { MealEditService } from 'src/app/services/meal-edit.service';
 
 @Component({
   selector: 'app-meal-info',
@@ -21,11 +21,11 @@ export class MealInfoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private editMealService: EditMealService
+    private MealEditService: MealEditService
   ) {
     this.route.params.subscribe((params) => {
       if (params.mealId != 'add') {
-        editMealService.getMeal(params.mealId).subscribe((e) => {
+        MealEditService.getMeal(params.mealId).subscribe((e) => {
           this.mealForm.setValue({
             name: e?.name,
             description: e?.description,
@@ -69,9 +69,9 @@ export class MealInfoComponent implements OnInit {
   }
 
   async onSubmit() {
-    alert('Thanks!');
+    
     if (this.selectedFile != undefined) {
-      const { task, fileRef } = this.editMealService.uploadFile(
+      const { task, fileRef } = this.MealEditService.uploadFile(
         this.selectedFile
       );
       task
@@ -81,15 +81,16 @@ export class MealInfoComponent implements OnInit {
             fileRef.getDownloadURL().subscribe((url) => {
               this.mealForm.get('cover')?.setValue(url);
               console.log(this.mealForm.value);
-              this.editMealService.addMeal(this.mealForm.value);
+              this.MealEditService.addMeal(this.mealForm.value);
               console.log('upload');
             });
           })
         )
         .subscribe();
     } else {
-      this.editMealService.addMeal(this.mealForm.value);
+      this.MealEditService.addMeal(this.mealForm.value);
       console.log('no upload');
     }
+    alert('Success!');
   }
 }

@@ -4,9 +4,11 @@ import { NavComponent } from './pages/nav/nav.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MealboardComponent } from './pages/mealboard/mealboard.component';
 import { MealInfoComponent } from './pages/meal-info/meal-info.component';
+import { MealViewComponent } from './pages/meal-view/meal-view.component';
+import { FakeMarketComponent } from './pages/fake-market/fake-market.component';
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'admin',
     component: NavComponent,
     children: [
       {
@@ -14,16 +16,24 @@ const routes: Routes = [
         component: DashboardComponent, // child route component that the router renders
       },
       {
-        path: 'meals/:mealId',
+        path: 'meals/edit/:mealId',
         component: MealInfoComponent, // another child route component that the router renders
+      },
+      {
+        path: 'meals/view/:mealId',
+        component: MealViewComponent, // another child route component that the router renders
       },
       {
         path: 'meals',
         component: MealboardComponent, // another child route component that the router renders
       },
+      {
+        path: 'fake-market',
+        component: FakeMarketComponent, // another child route component that the router renders
+      },
     ],
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
   // { path: '**', component: NavComponent }
 ];
 

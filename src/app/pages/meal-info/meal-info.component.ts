@@ -69,7 +69,6 @@ export class MealInfoComponent implements OnInit {
   }
 
   async onSubmit() {
-    
     if (this.selectedFile != undefined) {
       const { task, fileRef } = this.MealEditService.uploadFile(
         this.selectedFile
@@ -80,7 +79,6 @@ export class MealInfoComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               this.mealForm.get('cover')?.setValue(url);
-              console.log(this.mealForm.value);
               this.MealEditService.addMeal(this.mealForm.value);
               console.log('upload');
             });

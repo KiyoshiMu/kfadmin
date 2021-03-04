@@ -31,5 +31,4 @@ export class MealboardComponent {
   async rmMeal(mealId: string) {
     await this.MealEditService.rmMeal(mealId);
   }
-
 }

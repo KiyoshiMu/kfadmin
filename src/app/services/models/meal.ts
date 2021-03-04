@@ -1,20 +1,22 @@
 export interface MealUnit {
-  id: string;
+  mealId: string;
   name: string;
-  description: string;
+  price: number;
   size: string;
   cover: string;
-  price: number;
-  cost: number;
+  cost?: number;
+  description?: string;
   totalOrders?: number;
   weeklyOrders?: number;
 }
-
 export interface MealStat {
+  mealId: string;
   name: string;
-  size: string;
   price: number;
-  cost: number;
+  size: string;
+  cover: string;
+  cost?: number;
+  description?: string;
   weeklyOrder: number;
   totalOrder: number;
   totalIncome: number;

@@ -6,7 +6,6 @@ import {
 import { MealUnit } from './models/meal';
 import { AngularFireStorage } from '@angular/fire/storage';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -21,8 +20,10 @@ export class MealEditService {
 
   async addMeal(mealUnit: MealUnit) {
     try {
-      mealUnit.id = mealUnit.name + mealUnit.size;
-      await this.mealCollection.doc(mealUnit.id).set(mealUnit, { merge: true });
+      mealUnit.mealId = mealUnit.name + mealUnit.size;
+      await this.mealCollection
+        .doc(mealUnit.mealId)
+        .set(mealUnit, { merge: true });
     } catch (error) {
       console.error('Error adding document: ', error);
     }

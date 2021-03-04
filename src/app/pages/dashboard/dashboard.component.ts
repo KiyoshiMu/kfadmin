@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { SalestatService } from 'src/app/services/salestat.service';
+import { MealViewService } from 'src/app/services/meal-view.service';
+import { MealStat } from 'src/app/services/models/meal';
+import { Customer } from 'src/app/services/models/customer';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,29 +14,30 @@ import { SalestatService } from 'src/app/services/salestat.service';
 export class DashboardComponent {
   /** Based on the screen size, switch from standard to one column per row */
   saleStat$ = this.statService.getSaleStat();
-
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  bestIncomeMeal: MealStat | undefined;
+  bestOrderMeal: MealStat | undefined;
+  bestOrderCustomer: Customer | undefined;
+  bestConsumeCustomer: Customer | undefined;
+  cols = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 },
-        ];
+        return 1;
       }
-
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 },
-      ];
+      return 2;
     })
   );
-
+  // bad hacking practice
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.bestIncomeMeal = this.mealViewService.mostIncomeMeal;
+      this.bestOrderMeal = this.mealViewService.mostIncomeMeal;
+      this.bestOrderCustomer = this.mealViewService.mostOrderCustomer;
+      this.bestConsumeCustomer = this.mealViewService.mostConsumeCustomer;
+    }, 500);
+  }
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private statService: SalestatService
+    private statService: SalestatService,
+    private mealViewService: MealViewService
   ) {}
 }

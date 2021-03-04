@@ -1,20 +1,21 @@
 <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>{{(meal$! |async)?.name}}</mat-card-title>
-            <mat-card-subtitle>{{(meal$! |async)?.size}}</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image [src]="(meal$! |async)?.cover" alt="meal image" />
-    </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ (meal$! | async)?.name }}</mat-card-title>
+      <mat-card-subtitle>{{ (meal$! | async)?.size }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="(meal$! | async)?.cover" alt="meal image" />
+  </mat-card>
 
-    <div
-     fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
     <h2>
-            price: {{(mealStat$! |async)?.price}}; <br>
-            weeklyIncome: {{(mealStat$! |async)?.weeklyIncome}}; <br>
-            totalIncome: {{(mealStat$! |async)?.totalIncome}}; <br>
-            weeklyOrder: {{(mealStat$! |async)?.weeklyOrder}}; <br>
-            totalOrder: {{(mealStat$! |async)?.totalOrder}};
+      price: {{ (meal$! | async)?.price }}; <br />
+      cost: {{ (meal$! | async)?.cost }}; <br />
+      description: {{ (meal$! | async)?.description }}; <br />
+      weeklyIncome: {{ (meal$! | async)?.weeklyIncome }}; <br />
+      totalIncome: {{ (meal$! | async)?.totalIncome }}; <br />
+      weeklyOrder: {{ (meal$! | async)?.weeklyOrder }}; <br />
+      totalOrder: {{ (meal$! | async)?.totalOrder }};
     </h2>
-    </div>
+  </div>
 </div>

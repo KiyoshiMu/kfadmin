@@ -13,20 +13,22 @@ describe('FakeMarketComponent', () => {
   let component: FakeMarketComponent;
   let fixture: ComponentFixture<FakeMarketComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [FakeMarketComponent],
-      imports: [
-        NoopAnimationsModule,
-        LayoutModule,
-        MatButtonModule,
-        MatCardModule,
-        MatGridListModule,
-        MatIconModule,
-        MatMenuModule,
-      ]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [FakeMarketComponent],
+        imports: [
+          NoopAnimationsModule,
+          LayoutModule,
+          MatButtonModule,
+          MatCardModule,
+          MatGridListModule,
+          MatIconModule,
+          MatMenuModule,
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FakeMarketComponent);

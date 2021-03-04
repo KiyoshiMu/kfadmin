@@ -6,49 +6,48 @@ import { throwError } from 'rxjs';
 import { Order } from './models/order';
 
 interface response {
-  status: string,
-  message: string,
-  data: any,
+  status: string;
+  message: string;
+  data: any;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MockBuyService {
+  constructor(private http: HttpClient) {}
+  readonly buyUrl =
+    'https://us-central1-shadowserver.cloudfunctions.net/app/addOrder';
+  readonly completeUrl =
+    'https://us-central1-shadowserver.cloudfunctions.net/app/updateOrder';
 
-  constructor(private http: HttpClient) { }
-  readonly url = "https://us-central1-shadowserver.cloudfunctions.net/app/orders"
-
-  buy(meal: MealUnit) {
+  buy(customerId: string, meal: MealUnit) {
+    const dc: string = new Date(Date.now()).toUTCString();
     const order: Order = {
-      "First Name": "Anthony",
-      "Last Name": "Costa",
-      "Address": "1280 Main XXXXX Hamilton CA",
-      "Phone": "905 xxx xxxx",
-      "Email": "1111@gmail.com",
-      "Customer Notes": "",
-      "Payment method": "Cash on delivery",
-      "Items": [],
-      "Price": 40,
-      "Discount": 0,
-      "Refund Value": 0,
-      "Total Order Value": 0,
-      "Refund Reason": "",
-      "Date Created": "2019-08-19T18:04:05",
-      "Date Modified": "2019-09-02T18:07:51",
-      "Status": "completed",
-      "FromLastWeek": 0,
-      "FromLastFourWeeks": 0
-    }
-    order.Items.push({
-      "Name": meal.name,
-      "Quantity": 1,
-      "Size": meal.size,
-      "Piece Price": meal.price
-    })
-    return this.http.post<response>(this.url, order).pipe(
-      catchError(this.handleError)
-    )
+      customerId: customerId,
+      items: [],
+      status: 'start',
+      price: meal.price,
+      dateCreated: dc,
+    };
+    order.items.push({
+      mealId: meal.mealId,
+      name: meal.name,
+      quantity: 1,
+      size: meal.size,
+      piecePrice: meal.price,
+    });
+    return this.http
+      .post<response>(this.buyUrl, order)
+      .pipe(catchError(this.handleError));
+  }
+
+  complete(customerId: string, orderId: string) {
+    const status = 'completed';
+    console.log({ customerId, orderId, status });
+    return this.http
+      .post<response>(this.completeUrl, { customerId, orderId, status })
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -59,11 +58,10 @@ export class MockBuyService {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
       console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+      );
     }
     // Return an observable with a user-facing error message.
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError('Something bad happened; please try again later.');
   }
 }

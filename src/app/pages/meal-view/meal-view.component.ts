@@ -8,24 +8,21 @@ import { MealStat, MealUnit } from 'src/app/services/models/meal';
 @Component({
   selector: 'app-meal-view',
   templateUrl: './meal-view.component.html',
-  styleUrls: ['./meal-view.component.scss']
+  styleUrls: ['./meal-view.component.scss'],
 })
 export class MealViewComponent implements OnInit {
-  @Input() meal$: Observable<MealUnit | undefined> | undefined;
-  mealStat$: Observable<MealStat | undefined>  | undefined;
-  constructor(private route: ActivatedRoute,
-    private mealViewService: MealViewService) {
-      this.route.params.subscribe((params) => {
-        const mealId: string = params.mealId
-        if (this.meal$ == undefined) {
-          this.meal$ = this.mealViewService.getMeal(mealId)
-        }
-        this.mealStat$ = this.mealViewService.getMealStat(mealId)
-      })
-      
-    }
-
-  ngOnInit(): void {
+  @Input() meal$: Observable<MealStat | undefined> | undefined;
+  constructor(
+    private route: ActivatedRoute,
+    private mealViewService: MealViewService
+  ) {
+    this.route.params.subscribe((params) => {
+      const mealId: string = params.mealId;
+      if (this.meal$ == undefined) {
+        this.meal$ = this.mealViewService.getMealStat(mealId);
+      }
+    });
   }
 
+  ngOnInit(): void {}
 }

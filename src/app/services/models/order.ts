@@ -1,27 +1,27 @@
 export interface Order {
-  "First Name": string;
-  "Last Name": string;
-  Address: string;
-  Phone: string;
-  Email: string;
-  "Customer Notes": string;
-  "Payment method": string;
-  Items: Item[];
-  Price: number;
-  Discount: number;
-  "Refund Value": number;
-  "Total Order Value": number;
-  "Refund Reason": string;
-  "Date Created": string;
-  "Date Modified": string;
-  Status: string;
-  FromLastWeek: number;
-  FromLastFourWeeks: number;
+  customerId: string;
+  items: Item[];
+  price: number;
+  firstName?: string;
+  lastName?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
+  customerNotes?: string;
+  paymentMethod?: string;
+  discount?: number;
+  refundValue?: number;
+  totalOrderValue?: number;
+  refundReason?: string;
+  dateCreated: string | any;
+  dateModified?: string | any;
+  status: string;
 }
 
 export interface Item {
-  Name: string;
-  Quantity: number;
-  Size: string;
-  "Piece Price": number;
+  mealId: string;
+  name: string;
+  quantity: number;
+  size: string;
+  piecePrice: number;
 }
